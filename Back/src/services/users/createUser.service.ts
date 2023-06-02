@@ -1,14 +1,16 @@
 import { AppDataSource } from "../../data-source";
 import { Users } from "../../entities/users.entitie";
 import { AppError } from "../../errors/AppError";
-import { TUser, TUserResquest } from "../../interfaces/user.interface";
-import { userSchema } from "../../schemas/user.schema";
-
+import { TUserResponse } from "../../interfaces/user.interface";
+import { TUserResquest } from "../../interfaces/user.interface";
+import { userSchemaResponse } from "../../schemas/user.schema";
+import { hash } from "bcryptjs";
 const createUserService = async ({
   name,
   email,
   phone,
-}: TUserResquest): Promise<TUser> => {
+  password,
+}: TUserResquest): Promise<TUserResponse> => {
   const userRepository = AppDataSource.getRepository(Users);
   const findUser = await userRepository.findOne({
     where: { email },
@@ -17,13 +19,15 @@ const createUserService = async ({
   if (findUser) {
     throw new AppError("User already exists", 409);
   }
+  const hashedPassword = await hash(password, 10);
   const user = userRepository.create({
     email,
     name,
     phone,
+    password: hashedPassword,
   });
   await userRepository.save(user);
 
-  return userSchema.parse(user);
+  return userSchemaResponse.parse(user);
 };
 export { createUserService };

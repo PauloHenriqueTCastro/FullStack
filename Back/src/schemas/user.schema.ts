@@ -5,17 +5,22 @@ const userSchema = z.object({
   name: z.string(),
   email: z.string().email(),
   phone: z.number(),
+  password: z.string(),
+  createdAt: z.string(),
 });
-const userSchemaRequest = z.object({
-  name: z.string(),
-  email: z.string().email(),
-  phone: z.number(),
+const userSchemaRequest = userSchema.omit({
+  id: true,
+  createdAt: true,
 });
-const userSchemaUpdate = userSchema.partial();
+const userSchemaResponse = userSchema.omit({
+  password: true,
+});
+const userSchemaUpdate = userSchemaResponse.partial();
 const returnMultipleUserSchema = userSchema.array();
 export {
   userSchema,
   userSchemaRequest,
   returnMultipleUserSchema,
   userSchemaUpdate,
+  userSchemaResponse,
 };

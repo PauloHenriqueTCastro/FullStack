@@ -21,6 +21,9 @@ class Users {
   @Column()
   phone: number;
 
+  @Column()
+  password: string;
+
   @CreateDateColumn({ type: "date" })
   createdAt: string;
 

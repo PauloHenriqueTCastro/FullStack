@@ -3,7 +3,7 @@ import { ensureDataIsValidMiddleware } from "../middlewares/ensureDataIsValid.mi
 import {
   createContactController,
   deleteContactController,
-  getAllContactsController,
+  retriveContactsController,
   updateContactController,
 } from "../controllers/contacts.controller";
 import {
@@ -12,7 +12,7 @@ import {
 } from "../schemas/contact.schema";
 
 const contactsRoutes = Router();
-contactsRoutes.get("/", getAllContactsController);
+contactsRoutes.get("/:id", retriveContactsController);
 
 contactsRoutes.post(
   "/:id",

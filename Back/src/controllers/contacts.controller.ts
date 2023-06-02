@@ -11,8 +11,9 @@ const createContactController = async (req: Request, res: Response) => {
   const newUser = await createContactService(data, userId);
   return res.status(201).json(newUser);
 };
-const getAllContactsController = async (req: Request, res: Response) => {
-  const users = await listContactsService();
+const retriveContactsController = async (req: Request, res: Response) => {
+  const userId: number = parseInt(req.params.id);
+  const users = await listContactsService(userId);
   return res.json(users);
 };
 const deleteContactController = async (req: Request, res: Response) => {
@@ -27,7 +28,7 @@ const updateContactController = async (req: Request, res: Response) => {
 };
 export {
   createContactController,
-  getAllContactsController,
+  retriveContactsController,
   deleteContactController,
   updateContactController,
 };
