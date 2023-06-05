@@ -8,12 +8,12 @@ import { contactSchema } from "../../schemas/contact.schema";
 
 const createContactService = async (
   data: TContactResquest,
-  id: number
+  userId: string
 ): Promise<TContact> => {
   const contactRepository: Repository<Contact> =
     AppDataSource.getRepository(Contact);
   const userRepository: Repository<Users> = AppDataSource.getRepository(Users);
-  const users: Users | null = await userRepository.findOneBy({ id: id });
+  const users: Users | null = await userRepository.findOneBy({ id: userId });
   if (!users) {
     throw new AppError("User not found", 404);
   }

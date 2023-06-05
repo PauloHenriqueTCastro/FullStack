@@ -7,7 +7,7 @@ import { userSchema } from "../../schemas/user.schema";
 
 const updateUserService = async (
   data: TUserUpdate,
-  id: number
+  id: string
 ): Promise<TUser> => {
   const userRepository: Repository<Users> = AppDataSource.getRepository(Users);
   const oldUser: Users | null = await userRepository.findOneBy({

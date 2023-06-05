@@ -1,6 +1,14 @@
 import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
+:root {
+  --Main-Color: rgb(220,220,220);
+  --Buttons-Colors:#5c5cb5;
+  --Footer-Color: #5c5cb5;
+  --Inputs-Colors: #999999;
+  --White: #fff;
+  --Black: rgb(0, 0, 0);
+}
 button{cursor: pointer;}
 html,
 body,

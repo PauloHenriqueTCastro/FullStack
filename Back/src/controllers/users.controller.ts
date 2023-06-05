@@ -15,12 +15,12 @@ const getAllUsersController = async (req: Request, res: Response) => {
   return res.json(users);
 };
 const deleteUserController = async (req: Request, res: Response) => {
-  await deleteUserService(parseInt(req.params.id));
+  await deleteUserService(req.params.id);
   return res.status(204).send();
 };
 const updateUserController = async (req: Request, res: Response) => {
   const newValues = req.body;
-  const id = parseInt(req.params.id);
+  const id = req.params.id;
   const updateUser = await updateUserService(newValues, id);
   return res.json(updateUser);
 };

@@ -10,20 +10,23 @@ import {
   contactSchemaRequest,
   contactSchemaUpdate,
 } from "../schemas/contact.schema";
+import { ensureAuthMiddleware } from "../middlewares/ensureAuth.middleware";
+import { ensureIsOwnerMiddleware } from "../middlewares/ensureIsOwner.middleware";
 
 const contactsRoutes = Router();
-contactsRoutes.get("/:id", retriveContactsController);
 
+contactsRoutes.use(ensureAuthMiddleware);
+
+contactsRoutes.get("/", retriveContactsController);
 contactsRoutes.post(
-  "/:id",
+  "/",
   ensureDataIsValidMiddleware(contactSchemaRequest),
   createContactController
 );
-
 contactsRoutes.delete("/:id", deleteContactController);
-
 contactsRoutes.patch(
   "/:id",
+  ensureIsOwnerMiddleware,
   ensureDataIsValidMiddleware(contactSchemaUpdate),
   updateContactController
 );

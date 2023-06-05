@@ -7,12 +7,12 @@ import { contactSchema } from "../../schemas/contact.schema";
 
 const updateContactService = async (
   data: TContactUpdate,
-  id: number
+  userId: string
 ): Promise<TContact> => {
   const contactRepository: Repository<Contact> =
     AppDataSource.getRepository(Contact);
   const oldContact: Contact | null = await contactRepository.findOneBy({
-    id: id,
+    id: userId,
   });
 
   if (!oldContact) {

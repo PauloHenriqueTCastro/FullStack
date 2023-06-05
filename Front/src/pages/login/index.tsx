@@ -2,6 +2,10 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { TLoginData, schema } from "./validator";
 import { useAuth } from "../../hooks/userAuth";
+import Header from "../../components/header";
+import { MainConteiner } from "./style";
+import Footer from "../../components/footer";
+import { Form } from "../../styles/form";
 
 const Login = () => {
   const { singIn } = useAuth();
@@ -9,15 +13,18 @@ const Login = () => {
     resolver: zodResolver(schema),
   });
   return (
-    <main>
-      <h2>Register</h2>
-      <form onSubmit={handleSubmit(singIn)}>
+    <MainConteiner>
+      <Header />
+      <Form onSubmit={handleSubmit(singIn)}>
+        <h2>Login</h2>
         <label htmlFor="email">Email</label>
         <input type="email" id="email" {...register("email")} />
         <label htmlFor="password">Password</label>
         <input type="password" id="password" {...register("password")} />
-      </form>
-    </main>
+        <button type="submit">Entrar</button>
+      </Form>
+      <Footer />
+    </MainConteiner>
   );
 };
 export default Login;

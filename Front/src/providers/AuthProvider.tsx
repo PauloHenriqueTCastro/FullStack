@@ -1,4 +1,4 @@
-import { createContext, ReactNode } from "react";
+import { createContext, ReactNode, useEffect } from "react";
 import { TLoginData } from "./../pages/login/validator";
 import { api } from "../service/api";
 import { useNavigate } from "react-router-dom";
@@ -13,12 +13,22 @@ const AuthContext = createContext({} as IAuthContextValues);
 const AuthProvider = ({ children }: IAuthProviderProps) => {
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const token = localStorage.getItem("your:token");
+    if (!token) {
+      return;
+    }
+    api.defaults.headers.common.Authorization = `Bearer ${token}`;
+  });
+
   const singIn = async (data: TLoginData) => {
     try {
       const response = await api.post("/login", data);
+
       const { token } = response.data;
+
       api.defaults.headers.common.Authorization = `Bearer ${token}`;
-      localStorage.setItem("your: token", token);
+      localStorage.setItem("your:token", token);
       navigate("dashboard");
     } catch (error) {
       console.error(error);

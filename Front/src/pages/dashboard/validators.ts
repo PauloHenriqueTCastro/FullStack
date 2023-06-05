@@ -1,9 +1,10 @@
 import { z } from "zod";
 
 const schema = z.object({
+  name: z.string(),
   email: z.string().email("Deve ser um email"),
-  password: z.string(),
+  phone: z.string(),
 });
 
-export type TLoginData = z.infer<typeof schema>;
+export type TRegisterContactsData = z.infer<typeof schema>;
 export { schema };

@@ -9,8 +9,8 @@ import { Contact } from "./contact.entitie";
 
 @Entity("users")
 class Users {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn("uuid")
+  id: string;
 
   @Column({ length: 45 })
   name: string;
@@ -19,7 +19,7 @@ class Users {
   email: string;
 
   @Column()
-  phone: number;
+  phone: string;
 
   @Column()
   password: string;
