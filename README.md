@@ -8,7 +8,7 @@ POST /users
 {
 	"name": "xxxx",
 	"email": "xxxxx@mail.com",
-	"phone": "321312312",
+	"phone": "xxxxxxxx",
 	"password": "xxxxxxxx"
 }
 
@@ -58,9 +58,9 @@ Rota responsável pela obtenção de todos os contatos de um usuário, é necess
 PATCH /contacts/:id
 
 {
-	"name": "Não é mais Paulo",
-	"email": "mail1@mail.com",
-	"phone": 321312312
+	"name": "xxxxxxx",
+	"email": "xxxxxx@mail.com",
+	"phone": "xxxxxxx"
 }
 
 Rota responsável pela atualização dos contatos, é necessário passar um Bearer token para que seja possível a obtenção do id do usuário, também é necessário passa o id do contato para a atualização ser feita
